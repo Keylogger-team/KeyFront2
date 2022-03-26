@@ -22,9 +22,16 @@ namespace keyfront2
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.BackgroundColor == Color.Gray) dataGridView1.BackgroundColor = Color.Black;
+            else if (dataGridView1.BackgroundColor == Color.Black) dataGridView1.BackgroundColor = Color.White;
+            else if (dataGridView1.BackgroundColor == Color.White) dataGridView1.BackgroundColor = Color.Gray;
         }
     }
 }
