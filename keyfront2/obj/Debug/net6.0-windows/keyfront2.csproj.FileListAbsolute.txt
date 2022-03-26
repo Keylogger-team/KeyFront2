@@ -16,3 +16,4 @@ C:\Users\ccoo0\source\repos\keyfront2\keyfront2\obj\Debug\net6.0-windows\keyfron
 C:\Users\ccoo0\source\repos\keyfront2\keyfront2\obj\Debug\net6.0-windows\keyfront2.genruntimeconfig.cache
 C:\Users\ccoo0\source\repos\keyfront2\keyfront2\obj\Debug\net6.0-windows\ref\keyfront2.dll
 C:\Users\ccoo0\source\repos\keyfront2\keyfront2\obj\Debug\net6.0-windows\keyfront2.Properties.Resources.resources
+C:\Users\ccoo0\source\repos\keyfront2\keyfront2\obj\Debug\net6.0-windows\keyfront2.unvisible.resources
