@@ -40,6 +40,7 @@ namespace keyfront2
             else Size = new Size(1359, 788);
         }
 
+
         private void button3_Click(object sender, EventArgs e)
         {
             //SetForegroundWindow(hwnd);
@@ -61,6 +62,10 @@ namespace keyfront2
             //
             unvisible unvisible1= new unvisible();
             unvisible1.Show();
+
+
+
+
             //Form1.Close();
             //Application.Exit();
             //if (Form.ActiveForm == unvisible1) Application.Exit();
