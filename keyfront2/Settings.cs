@@ -15,9 +15,11 @@ namespace keyfront2
         public Settings()
         {
             InitializeComponent();
+            //themes
             string[] themes = { "Light", "Black" };
             listBox1.Items.AddRange(themes);
 
+            //desctop themes
             string[] descThemes = { "Default", "Light wood", "Bricks" };
             listBox2.Items.AddRange(descThemes);
 
@@ -25,6 +27,7 @@ namespace keyfront2
         }
         private void Settings_Load(object sender, EventArgs e)
         {
+            //opacity
             if (opacityOA == 0.14) trackBar1.Value = 0;
             else if (opacityOA == 0.29) trackBar1.Value = 1;
             else if (opacityOA == 0.43) trackBar1.Value = 2;
@@ -33,6 +36,7 @@ namespace keyfront2
             else if (opacityOA == 0.86) trackBar1.Value = 5;
             else if (opacityOA == 1) trackBar1.Value = 6;
 
+            //light theme
             if (theme == 0)
             {
                 listBox1.SelectedIndex = 0;
@@ -41,6 +45,7 @@ namespace keyfront2
                 this.label2.ForeColor = Color.Black;
                 this.label3.ForeColor = Color.Black;
             }
+            //dark theme
             else if (theme == 1)
             {
                 listBox1.SelectedIndex = 1;
@@ -50,6 +55,7 @@ namespace keyfront2
                 this.label3.ForeColor = Color.White;
             }
 
+            //desctop theme
             switch (descTheme)
             {
                 case 1:
@@ -64,8 +70,11 @@ namespace keyfront2
             }
         }
 
+        //-----------------------------------------------------------------------
         public double opacityOA;
+        public int theme;
         public int descTheme;
+        //-----------------------------------------------------------------------
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             switch (trackBar1.Value)
@@ -97,13 +106,11 @@ namespace keyfront2
             }
         }
 
-        public int theme;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             theme = listBox1.SelectedIndex;
             if (theme == 0)
             {
-                //listBox1.SelectedIndex = 0;
                 this.BackColor = Color.Gainsboro;
                 this.label1.ForeColor = Color.Black;
                 this.label2.ForeColor = Color.Black;
@@ -111,7 +118,6 @@ namespace keyfront2
             }
             else if (theme == 1)
             {
-                //listBox1.SelectedIndex = 1;
                 this.BackColor = Color.FromArgb(255, 64, 64, 64);
                 this.label1.ForeColor = Color.White;
                 this.label2.ForeColor = Color.White;
