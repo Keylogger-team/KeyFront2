@@ -8,6 +8,7 @@ namespace keyfront2
         public Form1()
         {
             InitializeComponent();
+            textBox2.Text = null;
             //this.dataGridView1.BackgroundColor = Color.FromArgb(255, 105, 105, 105);
 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
@@ -41,10 +42,26 @@ namespace keyfront2
             newFormsItem.Click += newFormsItem_Click;
             ToolStripMenuItem newFormsItem1 = new ToolStripMenuItem("Calendar");
             newFormsItem1.Click += newFormsItem1_Click;
+            ToolStripMenuItem newTextFormItem = new ToolStripMenuItem("Text box");
+            newTextFormItem.Click += newTextFormItem_Click;
+
+
             menuStrip1.Items.Add(formsItem);
             formsItem.DropDownItems.Add(newFormsItem);
             formsItem.DropDownItems.Add(newFormsItem1);
+            formsItem.DropDownItems.Add(newTextFormItem);
 
+            ToolStripMenuItem dataItem = new ToolStripMenuItem("Data");
+            ToolStripMenuItem hideHistoryItem = new ToolStripMenuItem("Hide current note history");
+            hideHistoryItem.Click += hideHistoryItem_Click;
+            menuStrip1.Items.Add(dataItem);
+            dataItem.DropDownItems.Add(hideHistoryItem);
+
+            ToolStripMenuItem settingsItem = new ToolStripMenuItem("Settings");
+            //ToolStripMenuItem hideHistoryItem = new ToolStripMenuItem("Hide current note history");
+            settingsItem.Click += settingsItem_Click;
+            menuStrip1.Items.Add(settingsItem);
+            //dataItem.DropDownItems.Add(hideHistoryItem);
 
             ToolStripMenuItem aboutItem = new ToolStripMenuItem("Info");
             aboutItem.Click += aboutItem_Click;
@@ -58,6 +75,9 @@ namespace keyfront2
         {
             textBox1.Text = "Your note for the day";
             textBox1.ForeColor = Color.Gray;
+            settings.opacityOA = opacityOA;
+            settings.theme = themeOA;
+            settings.descTheme = descThemeF1;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -78,13 +98,13 @@ namespace keyfront2
         }
 
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        //private void button3_Click(object sender, EventArgs e)
+        //{
             
-            unvisible unvisible1= new unvisible();
-            unvisible1.Show();
+        //    unvisible unvisible1= new unvisible();
+        //    unvisible1.Show();
 
-        }
+        //}
         
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -103,21 +123,38 @@ namespace keyfront2
         {
             if (Mas1.Contains(dateTimePicker1.Value.ToShortDateString()))
             {
-                Mas[Mas1.IndexOf(dateTimePicker1.Value.ToShortDateString())] = textBox1.Text;
+                //Mas[Mas1.IndexOf(dateTimePicker1.Value.ToShortDateString())] = textBox1.Text;
+                if (Mas[Mas1.IndexOf(dateTimePicker1.Value.ToShortDateString())] == textBox1.Text) ;
+                else
+                {
+                    Mas[Mas1.IndexOf(dateTimePicker1.Value.ToShortDateString())] = textBox1.Text;
+                    updateTextBox(Mas1.IndexOf(dateTimePicker1.Value.ToShortDateString()));
+                }
             }
             else 
             {
                 ++n;
                 Mas.Add(textBox1.Text);
                 Mas1.Add(dateTimePicker1.Value.ToShortDateString());
+                updateTextBox(Mas1.IndexOf(dateTimePicker1.Value.ToShortDateString()));
             }
         }
 
 
-        private void button4_Click(object sender, EventArgs e)
+        //private void button4_Click(object sender, EventArgs e)
+        //{
+        //    Form2 calendar = new Form2();
+        //    calendar.Show();
+        //}
+        void newTextFormItem_Click(object sender, EventArgs e)
         {
-            Form2 calendar = new Form2();
-            calendar.Show();
+            TextForm textForm = new TextForm();
+            opacityOA = settings.opacityOA;
+            themeOA = settings.theme;
+            textForm.theme_change(themeOA);
+            textForm.Opacity = opacityOA;
+            textForm.Show();
+            
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -133,6 +170,53 @@ namespace keyfront2
             if (Opacity == 1) Opacity = 0.50;
             else Opacity = 1;
         }
+        Settings settings = new Settings();
+        void settingsItem_Click(object sender, EventArgs e)
+        {
+            settings = new Settings();
+            settings.opacityOA = opacityOA;
+            settings.theme = themeOA;
+            settings.descTheme = descThemeF1;
+            settings.ShowDialog();
+            if (!settings.IsDisposed)
+            {
+                opacityOA = settings.opacityOA;
+                themeOA = settings.theme;
+                if (descThemeF1 != settings.descTheme)
+                {
+                    descThemeF1 = settings.descTheme;
+                    changeTheme(descThemeF1);
+                }
+            }
+
+        }
+        void changeTheme(int dt)
+        {
+            //if (dt == 1)
+            //{
+            //    this.BackgroundImage = Image.FromFile("lighttable.jpg");
+            //}
+            //else if (dt == 0)
+            //{
+            //    this.BackgroundImage = Image.FromFile("table.jpg");
+            //}
+            //else if (dt == 2)
+            //{
+            //    this.BackgroundImage = Image.FromFile("brick.jpg");
+            //}
+            switch (dt)
+            {
+                case 1:
+                    this.BackgroundImage = Image.FromFile("lighttable.jpg");
+                    break;
+                case 2:
+                    this.BackgroundImage = Image.FromFile("brick.jpg");
+                    break;
+                default:
+                    this.BackgroundImage = Image.FromFile("table.jpg");
+                    break;
+            }
+        }
         void saveItem_Click(object sender, EventArgs e)
         {
             if (this.dataGridView1.Visible) this.dataGridView1.Visible = false;
@@ -141,12 +225,20 @@ namespace keyfront2
         void newFormsItem_Click(object sender, EventArgs e)
         {
             unvisible unvisible1 = new unvisible();
+            opacityOA = settings.opacityOA;
+            unvisible1.Opacity = opacityOA;
             unvisible1.Show();
         }
         void newFormsItem1_Click(object sender, EventArgs e)
         {
             Form2 calendar = new Form2();
+            opacityOA = settings.opacityOA;
+            calendar.Opacity = opacityOA;
             calendar.Show();
+        }
+        void hideHistoryItem_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = null;
         }
         void visibilityCalendarItem_Click(object sender, EventArgs e)
         {
@@ -154,15 +246,21 @@ namespace keyfront2
             {
                 this.dateTimePicker1.Visible = false;
                 this.textBox1.Visible = false;
+                this.textBox2.Visible = false;
                 this.button1.Visible = false;
                 this.label1.Visible = false;
+                this.button2.Visible = false;
+                this.label2.Visible = false;
             }
             else
             {
                 this.dateTimePicker1.Visible = true;
                 this.textBox1.Visible = true;
+                this.textBox2.Visible = true;
                 this.button1.Visible = true;
                 this.label1.Visible = true;
+                this.button2.Visible = true;
+                this.label2.Visible = true;
             }
         }
 
@@ -174,10 +272,50 @@ namespace keyfront2
 
 
         private void button1_Click(object sender, EventArgs e)
+
         {
-            this.newNote();
+            if (textBox1.Text != "") this.newNote();
 
         }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        void updateTextBox(int i)
+        {
+            if (textBox2.Text != "") textBox2.Text += "\r\n";
+            textBox2.Text += Mas1[i] + "|" + Mas[i];
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Height == 108)
+            {
+                textBox2.Height = 408;
+                button2.Location = new Point(469, 554);
+            }
+            else
+            {
+                textBox2.Height = 108;
+                button2.Location = new Point(469, 254);
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public double opacityOA = 0.5;
+        public int themeOA = 0;
+        public int descThemeF1 = 0;
+        
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

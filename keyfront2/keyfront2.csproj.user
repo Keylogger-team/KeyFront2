@@ -7,6 +7,12 @@
     <Compile Update="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="unvisible.cs">
       <SubType>Form</SubType>
     </Compile>

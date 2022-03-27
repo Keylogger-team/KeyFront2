@@ -91,6 +91,7 @@
             this.Opacity = 0.5D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "unvisible";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.unvisible_Load);
