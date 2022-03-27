@@ -8,7 +8,10 @@ namespace keyfront2
         public Form1()
         {
             InitializeComponent();
+            label3.Text = "";
             textBox2.Text = null;
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
             //this.dataGridView1.BackgroundColor = Color.FromArgb(255, 105, 105, 105);
 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
@@ -316,6 +319,67 @@ namespace keyfront2
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label3.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            s = 0;
+            m = 1;
+            h = 0;
+            timer2.Start();
+        }
+        int s, m, h;
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            s = 0;
+            m = 10;
+            h = 0;
+            timer2.Start();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            s = 0;
+            m = 5;
+            h = 0;
+            timer2.Start();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            s = s - 1;
+            if (s == -1)
+            {
+                m = m - 1;
+                s = 59;
+            }
+
+            if (m == -1)
+            {
+                h = h - 1;
+                m = 59;
+            }
+            if (m == -1)
+            {
+                h = h - 1;
+                m = 59;
+            }
+            if (h == 0 && m == 0 && s == 0)
+            {
+                timer1.Stop();
+                MessageBox.Show("Time is over!");
+            }
         }
     }
 }
